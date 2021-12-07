@@ -14,7 +14,7 @@ variables:
   webAppName: 'python-cicd-PSB'
 
   # Agent VM image name
-  vmImage: 'ubuntu-latest'
+  name: 'MyPool'
 
   # Environment name
   environmentName: 'python-cicd-PSB'
@@ -22,8 +22,8 @@ variables:
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
 
-  # Python version: 3.7
-  pythonVersion: '3.7'
+  # Python version: 3.8
+  pythonVersion: '3.8'
 
 stages:
 - stage: Build
@@ -31,13 +31,10 @@ stages:
   jobs:
   - job: BuildJob
     pool:
-      vmImage: 'ubuntu-latest'
+      name: 'MyPool'
 
     steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '$(pythonVersion)'
-      displayName: 'Use Python $(pythonVersion)'
+    
 
     - script: |
         python -m venv antenv
@@ -68,7 +65,7 @@ stages:
   jobs:
   - deployment: DeploymentJob
     pool:
-      vmImage: 'ubuntu-latest'
+      name: 'MyPool'
     environment: $(environmentName)
     strategy:
       runOnce:
