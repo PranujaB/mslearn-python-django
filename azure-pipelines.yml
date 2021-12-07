@@ -1,7 +1,4 @@
 # Python to Linux Web App on Azure
-- task: PipAuthenticate@1
-  inputs:
-    artifactFeeds: 'pranujabhakare'
 # Build your Python project and deploy it to Azure as a Linux Web App.
 # Change python version to one thats appropriate for your application.
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
@@ -37,7 +34,9 @@ stages:
       name: 'MyPool'
 
     steps:
-    
+    - task: PipAuthenticate@1
+      inputs:
+        artifactFeeds: 'pranujabhakare'
 
     - script: |
         python -m venv antenv
