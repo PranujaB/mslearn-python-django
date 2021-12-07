@@ -14,7 +14,7 @@ variables:
   webAppName: 'python-cicd-PSB'
 
   # Agent VM image name
-  name: 'MyAgentPool'
+  vmImage: 'windows-latest'
 
   # Environment name
   environmentName: 'python-cicd-PSB'
@@ -23,7 +23,7 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
 
   # Python version: 3.7
-  pythonVersion: '3.8'
+  pythonVersion: '3.7'
 
 stages:
 - stage: Build
@@ -31,7 +31,7 @@ stages:
   jobs:
   - job: BuildJob
     pool:
-      name: 'MyAgentPool'
+      vmImage: 'windows-latest'
 
     steps:
     - task: UsePythonVersion@0
@@ -68,7 +68,7 @@ stages:
   jobs:
   - deployment: DeploymentJob
     pool:
-      name: 'MyAgentPool'
+      vmImage: 'windows-latest'
     environment: $(environmentName)
     strategy:
       runOnce:
